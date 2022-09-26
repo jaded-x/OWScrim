@@ -12,7 +12,7 @@ module.exports = {
 
         if (interaction.isSelectMenu()) {
             try {
-                await interaction.client.selectMenus.get(interaction.values[0]).execute(interaction, interaction.client)
+                await interaction.client.selectMenus.get(interaction.customId).execute(interaction, interaction.client)
             } catch (error) {
                 console.error(error);
             }
