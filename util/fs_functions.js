@@ -1,7 +1,7 @@
-const fs = require('fs');
+const fs  = require('fs');
 
 module.exports = {
-    createGuildDir, createGuildFile
+    createGuildDir, createGuildFile, createUserDir, createUserRoleFile
 }
 
 function createGuildDir(guildId) {
@@ -20,3 +20,18 @@ function createGuildFile(guildId, name, content) {
         })
     }
 }
+
+function createUserDir(userId) {
+    var dir = `./data/users/${userId}`;
+    if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir);
+    }
+}
+
+function createUserRoleFile(userId, role) {
+    var dir = `./data/users/${userId}/role.txt`
+    fs.writeFile(dir, role, function (err) {
+        if (err) throw err;
+        console.log(`Set role of ${userId} to ${role}`)
+    })
+} 

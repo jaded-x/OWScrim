@@ -1,4 +1,4 @@
-const { EmbedBuilder, ActionRowBuilder, SelectMenuBuilder } = require("discord.js")
+const { EmbedBuilder, ActionRowBuilder, SelectMenuBuilder } = require("discord.js");
 const fs = require('fs');
 
 module.exports = {
@@ -38,24 +38,28 @@ module.exports = {
                     .setPlaceholder('Select Availability')
                     .addOptions(
                         {
-                            label: 'Accept ✅',
+                            label: 'Accept',
                             description: 'Mark yourself as available for scrim',
-                            value: 'accept'
+                            value: 'accept',
+                            emoji: '✅'
                         },
                         {
-                            label: 'Maybe ❓',
+                            label: 'Maybe',
                             description: 'Mark yourself as a maybe',
-                            value: 'maybe'
+                            value: 'maybe',
+                            emoji: '❓'
                         },
                         {
-                            label: 'Decline ❌',
+                            label: 'Decline',
                             description: 'Mark yourself as unavailable for scrim',
-                            value: 'decline'
+                            value: 'decline',
+                            emoji: '❌'
                         },
                         {
-                            label: 'Clear 🚫',
+                            label: 'Clear',
                             description: 'Clear your responses',
-                            value: 'clear'
+                            value: 'clear',
+                            emoji: '🚫'
                         }
                     )
             )
