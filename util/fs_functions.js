@@ -13,12 +13,10 @@ function createGuildDir(guildId) {
 
 function createGuildFile(guildId, name, content) {
     var dir = `./data/guilds/${guildId}/${name}.txt`;
-    if (!fs.existsSync(dir)) {
-        fs.writeFile(dir, content, function (err) {
-            if (err) throw err;
-            console.log(`Created new guild data file: ${guildId}/${name}.txt`)
-        })
-    }
+    fs.writeFile(dir, content, function (err) {
+        if (err) throw err;
+        console.log(`Created new guild data file: ${guildId}/${name}.txt`)
+    })
 }
 
 function createUserDir(userId) {

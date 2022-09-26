@@ -4,7 +4,7 @@ const {capitalize} = require('../../util/format')
 
 module.exports = {
     name: 'select_role',
-    async execute(interaction, client) {
+    async execute(interaction) {
         createUserDir(interaction.user.id);
         createUserRoleFile(interaction.user.id, Role[interaction.values[0]]);
 
