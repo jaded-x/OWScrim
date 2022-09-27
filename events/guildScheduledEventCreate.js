@@ -15,26 +15,26 @@ module.exports = {
                     inline: false
                 },
                 {
-                    name: 'Accepted ✅',
-                    value: 'd',
-                    inline: true
-                },
-                {
-                    name: 'Maybe ❓',
+                    name: 'Accepted (0) ✅     ** **',
                     value: '** **',
                     inline: true
                 },
                 {
-                    name: 'Declined ❌',
-                    value: 'd',
+                    name: 'Maybe (0) ❓     ** **',
+                    value: '** **',
+                    inline: true
+                },
+                {
+                    name: 'Declined (0) ❌',
+                    value: '** **',
                     inline: true
                 }
-            ])
+            ]);
         
         const selection = new ActionRowBuilder()
             .addComponents(
                 new SelectMenuBuilder()
-                    .setCustomId('select')
+                    .setCustomId('scrim_select')
                     .setPlaceholder('Select Availability')
                     .addOptions(
                         {
@@ -54,12 +54,6 @@ module.exports = {
                             description: 'Mark yourself as unavailable for scrim',
                             value: 'decline',
                             emoji: '❌'
-                        },
-                        {
-                            label: 'Clear',
-                            description: 'Clear your responses',
-                            value: 'clear',
-                            emoji: '🚫'
                         }
                     )
             )

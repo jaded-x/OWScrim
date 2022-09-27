@@ -1,4 +1,5 @@
-const { ActionRowBuilder, SelectMenuBuilder } = require("discord.js")
+const { ActionRowBuilder, SelectMenuBuilder } = require("discord.js");
+const { Role } = require('../util/roles');
 
 module.exports = {
     name: 'role',
@@ -15,21 +16,25 @@ module.exports = {
                         {
                             label: 'Tank',
                             value: 'tank',
-                            emoji: '<:tank:1023991202808348744>'
+                            emoji: Role['tank']
                         },
                         {
                             label: 'Damage',
                             value: 'damage',
-                            emoji: '<:damage:1023991444245065768>'
+                            emoji: Role['damage']
                         },
                         {
                             label: 'Support',
                             value: 'support',
-                            emoji: '<:support:1023991410434773042>'
+                            emoji: Role['support']
                         }
                     )
             )
 
-        await interaction.reply({ content: message, components: [selection], ephemeral: true });
+        await interaction.reply({ 
+            content: message, 
+            components: [selection], 
+            ephemeral: true 
+        });
     }
 }

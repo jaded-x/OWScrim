@@ -21,17 +21,16 @@ for (const file of eventFiles) {
 }
 
 client.commands = new Collection();
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
-for (const file of commandFiles) {
-    const command = require(`./commands/${file}`);
-    client.commands.set(command.name, command);
-}
-
 client.selectMenus = new Collection();
-const selectMenuFiles = fs.readdirSync('./components/selectMenus').filter(file => file.endsWith('.js'));
-for (const file of selectMenuFiles) {
-    const selectMenu = require(`./components/selectMenus/${file}`);
-    client.selectMenus.set(selectMenu.name, selectMenu);
-}
+initInteraction(client.commands, './commands');
+initInteraction(client.selectMenus, './components/selectMenus');
 
 client.login(process.env.DISCORD_TOKEN);
+
+function initInteraction(collection, dir) {
+    const interactionFiles = fs.readdirSync(dir).filter(file => file.endsWith('.js'));
+    for (const file of interactionFiles) {
+        const interaction = require(`${dir}/${file}`);
+        collection.set(interaction.name, interaction);
+    }
+}

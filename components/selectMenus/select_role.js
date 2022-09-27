@@ -6,9 +6,12 @@ module.exports = {
     name: 'select_role',
     async execute(interaction) {
         createUserDir(interaction.user.id);
-        createUserRoleFile(interaction.user.id, Role[interaction.values[0]]);
+        createUserRoleFile(interaction.user.id, interaction.values[0]);
 
         const message = `> **Role set to ${capitalize(interaction.values[0])}** ${Role[interaction.values[0]]}`
-        interaction.update({ content: message, components: [] });
+        interaction.update({ 
+            content: message, 
+            components: [] 
+        });
     }
 }
