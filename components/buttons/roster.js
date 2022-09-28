@@ -1,5 +1,6 @@
-const { capitalize } = require('../../util/format')
+const { capitalize } = require('../../util/format');
 const { ActionRowBuilder, SelectMenuBuilder } = require("discord.js");
+const fs = require('fs');
 
 module.exports = {
     name: 'roster',
@@ -7,40 +8,42 @@ module.exports = {
         const embed = interaction.message.embeds[0];
         const message = `>>> Set Roster for **${embed.title}**\n${embed.fields[0].value.split(' ')[1]}`
         
-        const roles = ['tank', 'hitscan_dps', 'flex_dps', 'main_support', 'flex_support']
-        const selections = [];
+        const roles = ['main_tank', 'hitscan_damage', 'flex_damage', 'main_support', 'flex_support']
+        const roleNames = ['Tank', 'Hitscan DPS', 'Flex DPS', 'Main Support', 'Flex Support']
+        let selections = [];
         for (i = 0; i < 5; i++) {
-            
+
+            let options = [];
+            embed.fields[1].value.split('\n').forEach(player => {
+                if (fs.readFileSync(`./data/users/${player.split('┃')[1].match(/\d+/)[0]}/role.txt`, 'utf-8') == roles[i].split('_')[1]) {
+                    const option = {
+                        label: client.users.cache.get(player.split('┃')[1].match(/\d+/)[0]).username.replace('** **', ''),
+                        value: `player_${player.split('┃')[1]}`,
+                        emoji: player.split('┃')[0]
+                    }
+                    options.push(option);
+                }
+            });
+
+            if (options.length === 0) {
+                options = {
+                    label: 'None',
+                    value: 'none',
+                }
+            }
+
             const selection = new ActionRowBuilder()
             .addComponents(
                 new SelectMenuBuilder()
                     .setCustomId(`roster_${roles[i]}`)
-                    .setPlaceholder(`${capitalize(roles[i])}`)
-                    .addOptions(
-                        {
-                            label: 'Accept',
-                            value: 'accept',
-                            emoji: '✅'
-                        },
-                        {
-                            label: 'Maybe',
-                            description: 'Mark yourself as a maybe',
-                            value: 'maybe',
-                            emoji: '❓'
-                        },
-                        {
-                            label: 'Decline',
-                            description: 'Mark yourself as unavailable for scrim',
-                            value: 'decline',
-                            emoji: '❌'
-                        }
-                    )
+                    .setPlaceholder(`${roleNames[i]}`)
+                    .addOptions(options)
             )
 
             selections.push(selection);
         }
 
-        interaction.reply({ 
+        await interaction.reply({ 
             content: message,
             components: selections,
             ephemeral: true,

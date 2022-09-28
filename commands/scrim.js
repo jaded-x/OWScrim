@@ -6,7 +6,7 @@ module.exports = {
     admin: true,
     async execute(interaction) {
         createGuildFile(interaction.guild.id, 'scrim_channel', interaction.channelId);
-        interaction.reply({ 
+        await interaction.reply({ 
             content: `> **Set ${interaction.guild.channels.cache.get(interaction.channelId).toString()} as scrim channel.**`, 
             ephemeral: true
         });

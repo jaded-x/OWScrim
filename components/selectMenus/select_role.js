@@ -9,7 +9,7 @@ module.exports = {
         createUserRoleFile(interaction.user.id, interaction.values[0]);
 
         const message = `> **Role set to ${capitalize(interaction.values[0])}** ${Role[interaction.values[0]]}`
-        interaction.update({ 
+        await interaction.update({ 
             content: message, 
             components: [] 
         });

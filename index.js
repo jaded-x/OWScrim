@@ -1,6 +1,7 @@
 const fs  = require('fs');
 
-const { Client, GatewayIntentBits, Collection } = require('discord.js');
+const { Client, GatewayIntentBits, Collection, GuildMemberManager } = require('discord.js');
+const guildScheduledEventCreate = require('./events/guildScheduledEventCreate');
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
@@ -10,6 +11,7 @@ const client = new Client({
         GatewayIntentBits.GuildScheduledEvents
     ]
 });
+global.client = client;
 
 require('dotenv').config();
 

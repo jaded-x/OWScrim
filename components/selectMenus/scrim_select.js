@@ -11,6 +11,7 @@ module.exports = {
 
         for (i = 1; i <= 3; i++) {
             embed.fields[i].value = embed.fields[i].value.replaceAll(`\n${role}┃${interaction.member}`, '');
+            embed.fields[i].value = embed.fields[i].value.replaceAll(`${role}┃${interaction.member}\n`, '');
             embed.fields[i].value = embed.fields[i].value.replaceAll(`${role}┃${interaction.member}`, '');
         }
 
@@ -23,7 +24,9 @@ module.exports = {
 
 
         const editedEmbed = EmbedBuilder.from(embed);
-        await interaction.update({ embeds: [editedEmbed]});
+        await interaction.update({ 
+            embeds: [editedEmbed]
+        });
     }
 }
 

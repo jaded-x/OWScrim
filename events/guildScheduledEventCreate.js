@@ -67,7 +67,7 @@ module.exports = {
                 )
             
         var channelId = fs.readFileSync(`./data/guilds/${interaction.guild.id}/scrim_channel.txt`, 'utf-8');
-        interaction.guild.channels.cache.get(`${channelId}`).send({
+        await interaction.guild.channels.cache.get(`${channelId}`).send({
            embeds: [embed],
            components: [selection, button]
         });
