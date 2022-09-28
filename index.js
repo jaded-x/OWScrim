@@ -22,8 +22,10 @@ for (const file of eventFiles) {
 
 client.commands = new Collection();
 client.selectMenus = new Collection();
+client.buttons = new Collection();
 initInteraction(client.commands, './commands');
 initInteraction(client.selectMenus, './components/selectMenus');
+initInteraction(client.buttons, './components/buttons')
 
 client.login(process.env.DISCORD_TOKEN);
 

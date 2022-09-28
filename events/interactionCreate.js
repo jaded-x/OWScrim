@@ -29,5 +29,13 @@ module.exports = {
                 console.error(error);
             }
         }
+
+        if (interaction.isButton()) {
+            try {
+                await interaction.client.buttons.get(interaction.customId).execute(interaction);
+            } catch (error) {
+                console.log(error);
+            }
+        }
     }
 }

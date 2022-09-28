@@ -1,6 +1,6 @@
 const { createUserDir, createUserRoleFile } = require('../../util/fs_functions');
 const { Role } = require('../../util/roles')
-const {capitalize} = require('../../util/format')
+const { capitalize } = require('../../util/format')
 
 module.exports = {
     name: 'select_role',

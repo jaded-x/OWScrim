@@ -1,4 +1,4 @@
-const { EmbedBuilder, ActionRowBuilder, SelectMenuBuilder } = require("discord.js");
+const { EmbedBuilder, ActionRowBuilder, SelectMenuBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
 const fs = require('fs');
 
 module.exports = {
@@ -11,7 +11,7 @@ module.exports = {
             .addFields([
                 {
                     name: 'Start Time',
-                    value: `>>> <t:${Math.round(interaction.scheduledStartTimestamp / 1000)}>\n<t:${Math.round(interaction.scheduledStartTimestamp / 1000)}:R>`,
+                    value: `>>> <t:${Math.round(interaction.scheduledStartTimestamp / 1000)}> \n<t:${Math.round(interaction.scheduledStartTimestamp / 1000)}:R>`,
                     inline: false
                 },
                 {
@@ -57,11 +57,19 @@ module.exports = {
                         }
                     )
             )
-        
+
+        const button = new ActionRowBuilder()
+                .addComponents(
+                    new ButtonBuilder()
+                        .setCustomId('roster')
+                        .setLabel('Set Roster')
+                        .setStyle(ButtonStyle.Primary)
+                )
+            
         var channelId = fs.readFileSync(`./data/guilds/${interaction.guild.id}/scrim_channel.txt`, 'utf-8');
         interaction.guild.channels.cache.get(`${channelId}`).send({
            embeds: [embed],
-           components: [selection]
+           components: [selection, button]
         });
     }
 }
