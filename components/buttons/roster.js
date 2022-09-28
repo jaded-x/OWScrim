@@ -47,6 +47,6 @@ module.exports = {
             content: message,
             components: selections,
             ephemeral: true,
-        });
+        }).then(interaction.reply('hi'));
     }
 }
