@@ -13,7 +13,9 @@ module.exports = {
                 const editedEmbed = EmbedBuilder.from(embed);
                 message.edit({ embeds: [editedEmbed] })
             })
-            .catch(console.error);
+            .catch(() => {
+                if (interaction.values[0] !== 'none') console.error;
+            });
 
             interaction.deferUpdate();
     }
@@ -23,9 +25,9 @@ function getRoster(interaction, embed) {
     let field = {
         name: 'Roster',
         value: `${Role.tank} Tank: \n${Role.damage} HDPS: \n${Role.damage} FDPS: \n${Role.support} MS: \n${Role.support} FS: `,
-        inline: false
+        inline: true
     }
-    if (embed.fields.length === 5) field.value = embed.fields[4].value;
+    if (embed.fields.length >= 5) field.value = embed.fields[4].value;
 
     let roles = field.value.split('\n');
     let customId = interaction.values[0].split('_');

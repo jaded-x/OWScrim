@@ -1,4 +1,4 @@
-const { ActionRowBuilder, SelectMenuBuilder, ButtonStyle, ButtonBuilder } = require('discord.js');
+const { ActionRowBuilder, SelectMenuBuilder } = require('discord.js');
 const { getDirectories } = require('../../util/fs_functions');
 const { Role } = require('../../util/roles');
 const fs = require('fs');

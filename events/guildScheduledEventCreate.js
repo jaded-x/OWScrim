@@ -66,8 +66,12 @@ module.exports = {
                         .setStyle(ButtonStyle.Primary),
                     new ButtonBuilder()
                         .setCustomId('subs')
-                        .setLabel('Set Subs')
+                        .setLabel('Add Sub')
                         .setStyle(ButtonStyle.Primary),
+                        new ButtonBuilder()
+                        .setCustomId('remove_subs')
+                        .setLabel('Remove Sub')
+                        .setStyle(ButtonStyle.Danger),
                 )
             
         var channelId = fs.readFileSync(`./data/guilds/${interaction.guild.id}/scrim_channel.txt`, 'utf-8');
