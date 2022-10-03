@@ -23,7 +23,6 @@ module.exports = {
             embed.fields[i].name = embed.fields[i].name.replace(embed.fields[i].name.match(/\d+/)[0], embed.fields[i].value.replace(/[^┃]/g, '').length);
         }
 
-
         const editedEmbed = EmbedBuilder.from(embed);
         await interaction.update({ 
             embeds: [editedEmbed]

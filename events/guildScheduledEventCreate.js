@@ -63,7 +63,11 @@ module.exports = {
                     new ButtonBuilder()
                         .setCustomId('roster')
                         .setLabel('Set Roster')
-                        .setStyle(ButtonStyle.Primary)
+                        .setStyle(ButtonStyle.Primary),
+                    new ButtonBuilder()
+                        .setCustomId('subs')
+                        .setLabel('Set Subs')
+                        .setStyle(ButtonStyle.Primary),
                 )
             
         var channelId = fs.readFileSync(`./data/guilds/${interaction.guild.id}/scrim_channel.txt`, 'utf-8');

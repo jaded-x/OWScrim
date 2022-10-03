@@ -1,4 +1,4 @@
-const { ActionRowBuilder, SelectMenuBuilder } = require('discord.js');
+const { ActionRowBuilder, SelectMenuBuilder, ButtonStyle, ButtonBuilder } = require('discord.js');
 const { getDirectories } = require('../../util/fs_functions');
 const { Role } = require('../../util/roles');
 const fs = require('fs');
@@ -26,7 +26,7 @@ module.exports = {
                     const option = {
                         label: `${client.users.cache.get(player).username.replace('** **', '')}`,
                         description: description,
-                        value: `player_${player}`,
+                        value: `player_${player}_${i}`,
                         emoji: Role[playerRole]
                     }
                     options.push(option);
@@ -41,12 +41,12 @@ module.exports = {
             }
 
             const selection = new ActionRowBuilder()
-            .addComponents(
-                new SelectMenuBuilder()
-                    .setCustomId(`roster_${roles[i]}`)
-                    .setPlaceholder(`${roleNames[i]}`)
-                    .addOptions(options)
-            )
+                .addComponents(
+                    new SelectMenuBuilder()
+                        .setCustomId(`roster_${roles[i]}_${interaction.message.id}`)
+                        .setPlaceholder(`${roleNames[i]}`)
+                        .addOptions(options)
+                )
 
             selections.push(selection);
         }
