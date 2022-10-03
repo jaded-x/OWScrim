@@ -1,5 +1,6 @@
-const { capitalize } = require('../../util/format');
-const { ActionRowBuilder, SelectMenuBuilder } = require("discord.js");
+const { ActionRowBuilder, SelectMenuBuilder } = require('discord.js');
+const { getDirectories } = require('../../util/fs_functions');
+const { Role } = require('../../util/roles');
 const fs = require('fs');
 
 module.exports = {
@@ -9,17 +10,24 @@ module.exports = {
         const message = `>>> Set Roster for **${embed.title}**\n${embed.fields[0].value.split(' ')[1]}`
         
         const roles = ['main_tank', 'hitscan_damage', 'flex_damage', 'main_support', 'flex_support']
-        const roleNames = ['Tank', 'Hitscan DPS', 'Flex DPS', 'Main Support', 'Flex Support']
+        const roleNames = [`Tank`, 'Hitscan DPS', 'Flex DPS', 'Main Support', 'Flex Support']
         let selections = [];
         for (i = 0; i < 5; i++) {
 
             let options = [];
-            embed.fields[1].value.split('\n').forEach(player => {
-                if (fs.readFileSync(`./data/users/${player.split('┃')[1].match(/\d+/)[0]}/role.txt`, 'utf-8') == roles[i].split('_')[1]) {
+            getDirectories('./data/users/').forEach(player => {
+                const playerRole = fs.readFileSync(`./data/users/${player}/role.txt`, 'utf-8');
+                if (interaction.guild.members.cache.get(player) && playerRole == roles[i].split('_')[1] && !embed.fields[3].value.includes(player)) {
+
+                    let description = '❔ Player has not replied to scrim.';
+                    if (embed.fields[1].value.includes(player)) description = '✅ Player is available for scrim.';
+                    else if (embed.fields[2].value.includes(player)) description = '❓ Player is marked as maybe for scrim.';
+
                     const option = {
-                        label: client.users.cache.get(player.split('┃')[1].match(/\d+/)[0]).username.replace('** **', ''),
-                        value: `player_${player.split('┃')[1]}`,
-                        emoji: player.split('┃')[0]
+                        label: `${client.users.cache.get(player).username.replace('** **', '')}`,
+                        description: description,
+                        value: `player_${player}`,
+                        emoji: Role[playerRole]
                     }
                     options.push(option);
                 }
@@ -47,6 +55,6 @@ module.exports = {
             content: message,
             components: selections,
             ephemeral: true,
-        }).then(interaction.reply('hi'));
+        })
     }
 }

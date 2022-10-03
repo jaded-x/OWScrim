@@ -1,7 +1,7 @@
 const fs  = require('fs');
 
 module.exports = {
-    createGuildDir, createGuildFile, createUserDir, createUserRoleFile
+    createGuildDir, createGuildFile, createUserDir, createUserRoleFile, getDirectories
 }
 
 function createGuildDir(guildId) {
@@ -33,3 +33,9 @@ function createUserRoleFile(userId, role) {
         console.log(`Set role of ${userId} to ${role}`)
     })
 } 
+
+function getDirectories(path) {
+    return fs.readdirSync(path).filter(function (file) {
+        return fs.statSync(`${path}/${file}`).isDirectory();
+    });
+}

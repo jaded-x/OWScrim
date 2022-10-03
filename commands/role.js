@@ -10,7 +10,7 @@ module.exports = {
         const selection = new ActionRowBuilder()
             .addComponents(
                 new SelectMenuBuilder()
-                    .setCustomId('select_role')
+                    .setCustomId('role_select')
                     .setPlaceholder('Select Role')
                     .addOptions(
                         {

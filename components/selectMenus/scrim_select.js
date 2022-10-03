@@ -10,9 +10,10 @@ module.exports = {
         const option = Options[interaction.values[0]];
 
         for (i = 1; i <= 3; i++) {
-            embed.fields[i].value = embed.fields[i].value.replaceAll(`\n${role}┃${interaction.member}`, '');
-            embed.fields[i].value = embed.fields[i].value.replaceAll(`${role}┃${interaction.member}\n`, '');
-            embed.fields[i].value = embed.fields[i].value.replaceAll(`${role}┃${interaction.member}`, '');
+            embed.fields[i].value.split('\n').forEach(line => {
+                if (line.includes(interaction.member)) embed.fields[i].value = embed.fields[i].value.replaceAll(`${line}`, ''); 
+                if (embed.fields[i].value === '') embed.fields[i].value = '** **';
+            })
         }
 
         if (embed.fields[option].value === '** **') embed.fields[option].value = `${embed.fields[option].value}${role}┃${interaction.member}`
