@@ -24,7 +24,7 @@ module.exports = {
 
         if (interaction.isSelectMenu()) {
             try {
-                await client.selectMenus.get(`${interaction.customId.split('_')[0]}_select`).execute(interaction)
+                await client.selectMenus.get(`${interaction.customId.split('_')[0]}`).execute(interaction)
             } catch (error) {
                 console.error(error);
             }

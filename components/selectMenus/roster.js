@@ -2,7 +2,7 @@ const { EmbedBuilder } = require("discord.js");
 const { Role } = require('../../util/roles');
 
 module.exports = {
-    name: 'roster_select',
+    name: 'roster',
     async execute(interaction) {
         interaction.channel.messages.fetch(interaction.customId.split('_')[3])
             .then(message => {

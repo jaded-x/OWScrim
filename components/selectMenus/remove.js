@@ -1,7 +1,7 @@
 const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
-    name: 'remove_select',
+    name: 'remove',
     async execute(interaction) {
         interaction.channel.messages.fetch(interaction.customId.split('_')[1])
             .then(message => {

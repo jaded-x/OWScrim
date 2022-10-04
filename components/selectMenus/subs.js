@@ -3,7 +3,7 @@ const { Role } = require('../../util/roles');
 const fs = require('fs');
 
 module.exports = {
-    name: 'subs_select',
+    name: 'subs',
     async execute(interaction) {
         interaction.channel.messages.fetch(interaction.customId.split('_')[1])
             .then(message => {

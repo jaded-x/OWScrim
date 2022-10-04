@@ -3,7 +3,7 @@ const { Role } = require('../../util/roles')
 const { capitalize } = require('../../util/format')
 
 module.exports = {
-    name: 'role_select',
+    name: 'role',
     async execute(interaction) {
         createUserDir(interaction.user.id);
         createUserRoleFile(interaction.user.id, interaction.values[0]);

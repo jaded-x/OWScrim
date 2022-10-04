@@ -14,6 +14,7 @@ module.exports = {
         getDirectories('./data/users/').forEach(player => {
             const playerRole = fs.readFileSync(`./data/users/${player}/role.txt`, 'utf-8');
             players: if (interaction.guild.members.cache.get(player) && !embed.fields[3].value.includes(player)) {
+                if (embed.fields.length === 5) if (embed.fields[4].value.includes(player)) break players;
                 if (embed.fields.length === 6) if (embed.fields[5].value.includes(player)) break players;
 
                 let description = '❔ Player has not replied to scrim.';

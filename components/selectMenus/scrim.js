@@ -3,7 +3,7 @@ const fs = require('fs');
 const { Role } = require('../../util/roles');
 
 module.exports = {
-    name: 'scrim_select',
+    name: 'scrim',
     async execute(interaction) {
         var embed = interaction.message.embeds[0].toJSON()
         const role = Role[fs.readFileSync(`./data/users/${interaction.member.id}/role.txt`, 'utf-8')];
