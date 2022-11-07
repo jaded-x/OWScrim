@@ -14,7 +14,7 @@ module.exports = {
                 message.edit({ embeds: [editedEmbed] })
             })
             .catch(() => {
-                if (interaction.values[0] !== 'none') console.error;
+                console.error;
             });
 
             interaction.deferUpdate();
@@ -24,14 +24,15 @@ module.exports = {
 function getRoster(interaction, embed) {
     let field = {
         name: 'Roster',
-        value: `${Role.tank} Tank: \n${Role.damage} HDPS: \n${Role.damage} FDPS: \n${Role.support} MS: \n${Role.support} FS: `,
+        value: `${Role.tank} Tank: \n${Role.damage} HDPS: \n${Role.damage} FDPS: \n${Role.support} MS: \n${Role.support} AS: `,
         inline: true
     }
     if (embed.fields.length >= 5) field.value = embed.fields[4].value;
 
     let roles = field.value.split('\n');
     let customId = interaction.values[0].split('_');
-    roles[customId[2]] = `${roles[customId[2]].split(/: (.*)/s)[0]}: ${interaction.guild.members.cache.get(customId[1])}`
+    if (customId[0] !== 'none') roles[customId[2]] = `${roles[customId[2]].split(/: (.*)/s)[0]}: ${interaction.guild.members.cache.get(customId[1])}`
+    else roles[customId[1]] = `${roles[customId[1]].split(/: (.*)/s)[0]}: `
     field.value = roles.toString().replaceAll(',', '\n');
 
     return field;

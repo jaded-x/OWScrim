@@ -9,12 +9,16 @@ module.exports = {
         const embed = interaction.message.embeds[0];
         const message = `>>> Set Roster for **${embed.title}**\n${embed.fields[0].value.split(' ')[1]}`
         
-        const roles = ['main_tank', 'hitscan_damage', 'flex_damage', 'main_support', 'flex_support']
-        const roleNames = [`Tank`, 'Hitscan DPS', 'Flex DPS', 'Main Support', 'Flex Support']
+        const roles = ['main_tank', 'hitscan_damage', 'flex_damage', 'main_support', 'aim_support']
+        const roleNames = ['Tank', 'Hitscan DPS', 'Flex DPS', 'Main Support', 'Aim Support']
         let selections = [];
         for (i = 0; i < 5; i++) {
 
-            let options = [];
+            let options = [{
+                label: 'None',
+                value: `none_${i}`,
+            }]
+
             getDirectories('./data/users/').forEach(player => {
                 const playerRole = fs.readFileSync(`./data/users/${player}/role.txt`, 'utf-8');
                 if (interaction.guild.members.cache.get(player) && playerRole == roles[i].split('_')[1] && !embed.fields[3].value.includes(player)) {
@@ -32,13 +36,6 @@ module.exports = {
                     options.push(option);
                 }
             });
-
-            if (options.length === 0) {
-                options = {
-                    label: 'None',
-                    value: 'none',
-                }
-            }
 
             const selection = new ActionRowBuilder()
                 .addComponents(
